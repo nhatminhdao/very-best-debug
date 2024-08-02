@@ -307,6 +307,9 @@ task({ :sample_data => :environment}) do
   ]
   Comment.insert_all!(comments)
 
+  ActiveRecord::Base.connection.tables.each do |t|
+    ActiveRecord::Base.connection.reset_pk_sequence!(t)
+  end
 
   ending = Time.now
   elapsed = ending - starting

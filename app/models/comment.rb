@@ -2,7 +2,7 @@
 #
 # Table name: comments
 #
-#  id         :integer          not null, primary key
+#  id         :bigint           not null, primary key
 #  body       :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
@@ -14,12 +14,12 @@ class Comment < ApplicationRecord
   validates(:commenter, { :presence => true })
 
   def commenter
-    my_id = self.id
+    my_author_id = self.author_id
     
-    matching_users = User.where({ :id => my_id })
+    matching_users = User.where({ :id => my_author_id })
 
-    the_user = matching_users.at(0)
+    the_commenter = matching_users.at(0)
     
-    return the_user
+    return the_commenter
   end
 end

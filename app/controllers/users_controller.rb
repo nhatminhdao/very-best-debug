@@ -4,15 +4,15 @@ class UsersController < ApplicationController
     matching_users = User.all
     @users = matching_users.order(:created_at)
 
-    render({ :template => "users_templates/all_users"})
+    render({ :template => "user_templates/index"})
   end
   
   def show
-    username = params.fetch("username")
-    matching_users = User.where({ :username => username })
+    the_username = params.fetch("username")
+    matching_users = User.where({ :username => the_username })
     @user = matching_users.at(0)
 
-    render({ :template => "user_templates/user_details"})
+    render({ :template => "user_templates/show"})
   end
   
   def create
